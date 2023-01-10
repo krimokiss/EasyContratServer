@@ -78,7 +78,7 @@ exports.postUserEntreprise = async (req,res) => {
             [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape]
         );
  // creation du token
- let id = newUser.salarie_id
+ let id = newUser.entreprise_id
  const token = jwt.sign(
      {
          id, email, mdp
