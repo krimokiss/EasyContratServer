@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require("dotenv").config()
 
 //import api routers
 const salarieRoute = require('./routes/router-salarie');
