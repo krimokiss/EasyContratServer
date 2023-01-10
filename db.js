@@ -9,7 +9,6 @@ const Pool = require("pg").Pool;
 //     database: "easycontrat"
 // });
 
-console.log(process.env.HOST);
 
 
 const pool = new Pool({

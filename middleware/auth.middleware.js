@@ -1,5 +1,5 @@
 const jwt = require  ("jsonwebtoken");
-const SECRET = process.env.SECRET
+const SECRET = `${process.env.SECRET}`
 
 /**
  *
