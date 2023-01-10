@@ -17,7 +17,7 @@ const pool = new Pool({
     host: "dpg-ceuil56n6mpglqd2v0ng-a.frankfurt-postgres.render.com",
     port: process.env.PORT,
     database: process.env.DATABASE,
-    ssl:process.env.SSL
+    ssl:true
 });
 
 
