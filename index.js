@@ -3,9 +3,9 @@ const app = express();
 const cors = require("cors");
 
 //import api routers
-const salarieRoute = require('../server/routes/router-salarie');
-const entrepriseRoute = require('../server/routes/router-entreprise');
-const contratRoute = require('../server/routes/router-contrat')
+const salarieRoute = require('./routes/router-salarie');
+const entrepriseRoute = require('./routes/router-entreprise');
+const contratRoute = require('./routes/router-contrat')
 
 // Middleware
 app.use(cors());
