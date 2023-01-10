@@ -9,15 +9,16 @@ const Pool = require("pg").Pool;
 //     database: "easycontrat"
 // });
 
+console.log(process.env.HOST);
 
 
 const pool = new Pool({
-    user: process.env.USER,
-    password: process.env.PASSWORD,
+    user: 'krimo',
+    password: 'NHmEY67R9P0BsQH8uotIjLm9zeYqvUvo',
     host: "dpg-ceuil56n6mpglqd2v0ng-a.frankfurt-postgres.render.com",
-    port: process.env.PORT,
-    database: process.env.DATABASE,
-    ssl:process.env.SSL
+    port: 5432,
+    database: "easycontrat",
+    ssl:true
 });
 
 
