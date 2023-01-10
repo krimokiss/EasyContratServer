@@ -2,6 +2,7 @@ const express = require('express');
 const myRouter = express.Router();
 const salarie = require('../controllers/salarie/crud-salarie');
 const verifyToken = require('../middleware/auth.middleware')
+const routeSalarie = express.Router()
 const {loginSalarie}=require('../controllers/salarie/crud-salarie')
 
 routeSalarie
