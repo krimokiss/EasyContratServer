@@ -1,7 +1,7 @@
 
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const SECRET = require("../../config.js")
+const SECRET = process.env.SECRET
 const pool = require("../../db");
 const express = require('express');
 const salarieRouter = express.Router();
