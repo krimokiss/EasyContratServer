@@ -12,11 +12,11 @@ const contratRoute = require('./routes/router-contrat')
 app.use(cors());
 app.use(express.json()); //req.body
 
-app.use((req, res, next)=>{
-    let {url, ip, method, headers} = req
-    console.log({url, ip, method, headers});
-    return next()
-})
+// app.use((req, res, next)=>{
+//     let {url, ip, method, headers} = req
+//     console.log({url, ip, method, headers});
+//     return next()
+// })
 
 //redirect to routes
 app.use("/api/salarie", salarieRoute);
