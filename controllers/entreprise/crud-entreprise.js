@@ -67,15 +67,16 @@ exports.postUserEntreprise = async (req,res) => {
         email,
         siret,
         raison_sociale,
-        code_ape } = req.body;
+        code_ape,
+        sign } = req.body;
 
         let { mdp } = req.body;
         let hashedPassword = await bcrypt.hash(mdp, 10);
         mdp = hashedPassword
 
         const newUser = await pool.query (
-            "INSERT INTO entreprise (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",
-            [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape]
+            "INSERT INTO entreprise (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *",
+            [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign]
         );
  // creation du token
  let id = newUser.entreprise_id
@@ -181,10 +182,10 @@ exports.updateUserEntreprise = async (req,res) => {
             // console.log(req.body[key]);
         }
         
-        const { civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape } = user
+        const { civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign } = user
         const updateUser = await pool.query (
-            "UPDATE entreprise SET civilite = $2,nom = $3,prenom = $4,telephone = $5,rue = $6,cp = $7,ville = $8,email = $9,mdp =$10,siret = $11,raison_sociale = $12,code_ape = $13 WHERE entreprise_id = $1", [
-                id,civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape
+            "UPDATE entreprise SET civilite = $2,nom = $3,prenom = $4,telephone = $5,rue = $6,cp = $7,ville = $8,email = $9,mdp =$10,siret = $11,raison_sociale = $12,code_ape = $13,sign = $14 WHERE entreprise_id = $1", [
+                id,civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign
             ]
         );
         res.status(200).json("User was updated!")
