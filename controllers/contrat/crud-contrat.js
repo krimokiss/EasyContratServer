@@ -72,10 +72,11 @@ exports.postContrat = async (req,res) => {
         motif,
         fonction,
         statut,
-    remuneration } = req.body;
+    remuneration,
+    validation } = req.body;
         const newContrat = await pool.query (
-            "INSERT INTO contrat (fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *",
-            [fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration]
+            "INSERT INTO contrat (fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *",
+            [fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation]
         );
         res.json(newContrat);
     } catch (err) {
@@ -115,10 +116,10 @@ exports.updateContrat = async (req,res) => {
             user[key] = req.body[key] || user[key];
             // console.log(req.body[key]);
         }
-        const { fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration } = user
+        const { fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation } = user
         const updateContrat = await pool.query (
-            "UPDATE entreprise SET fki_entreprise = $2,fki_salarie = $3,type_contrat = $4,is_fulltime = $5,date_debut = $6,date_fin = $7,periode_essai = $8,motif = $9,fonction = $10,statut = $11,remuneration = $12 WHERE contrat_id = $1", [
-                id,fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration
+            "UPDATE entreprise SET fki_entreprise = $2,fki_salarie = $3,type_contrat = $4,is_fulltime = $5,date_debut = $6,date_fin = $7,periode_essai = $8,motif = $9,fonction = $10,statut = $11,remuneration = $12,validation = $13 WHERE contrat_id = $1", [
+                id,fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation
             ]
         );
         res.json("Contrat was updated!")
