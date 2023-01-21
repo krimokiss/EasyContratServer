@@ -111,6 +111,7 @@ exports.updateContrat = async (req,res) => {
               });
         }
         user = user.rows[0]
+        console.log('update contrat',user.rows[0]);
 
         for (const key in req.body) {
             user[key] = req.body[key] || user[key];
@@ -118,7 +119,7 @@ exports.updateContrat = async (req,res) => {
         }
         const { fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation } = user
         const updateContrat = await pool.query (
-            "UPDATE entreprise SET fki_entreprise = $2,fki_salarie = $3,type_contrat = $4,is_fulltime = $5,date_debut = $6,date_fin = $7,periode_essai = $8,motif = $9,fonction = $10,statut = $11,remuneration = $12,validation = $13 WHERE contrat_id = $1", [
+            "UPDATE contrat SET fki_entreprise = $2,fki_salarie = $3,type_contrat = $4,is_fulltime = $5,date_debut = $6,date_fin = $7,periode_essai = $8,motif = $9,fonction = $10,statut = $11,remuneration = $12,validation = $13 WHERE contrat_id = $1", [
                 id,fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation
             ]
         );
