@@ -113,8 +113,8 @@ exports.updateContrat = async (req,res) => {
         user = user.rows[0]
         console.log('update contrat',user.rows[0]);
 
-        for (const key in req.body) {
-            user[key] = req.body[key] || user[key];
+        for (const key in req.body.formulaire) {
+            user[key] = req.body.formulaire[key] || user[key];
             // console.log(req.body[key]);
         }
         const { fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation } = user
@@ -123,8 +123,9 @@ exports.updateContrat = async (req,res) => {
                 id,fki_entreprise,fki_salarie,type_contrat,is_fulltime,date_debut,date_fin,periode_essai,motif,fonction,statut,remuneration,validation
             ]
         );
-        res.json("Contrat was updated!")
+        res.status(200).json("Contrat was updated!")
     } catch (err) {
         console.log(err.message);
+        res.status(400).send(err.message)
     }
 };
