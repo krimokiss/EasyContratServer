@@ -106,8 +106,9 @@ exports.updateContrat = async (req,res) => {
         )
        
         if(user.rowCount === 0){
+            console.log('bjsdhbshdj', user);
             res.status(400).json({
-                status: "Bad request"
+                status: "Bad requestfdgfdgdf"
               });
         }
         user = user.rows[0]
