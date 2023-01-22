@@ -69,15 +69,15 @@ exports.postUser = async (req, res) => {
                 date_naissance,
                 lieu_naissance,
                 pays_naissance,
-                signature } = req.body;
+                 } = req.body;
 
             let { mdp } = req.body;
             let hashedPassword = await bcrypt.hash(mdp, 10);
             mdp = hashedPassword
 
             const newUser = await pool.query(
-                "INSERT INTO salarie (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,nom_jeune_fille,num_ss,date_naissance,lieu_naissance,pays_naissance,signature) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *",
-                [civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance, signature]
+                "INSERT INTO salarie (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,nom_jeune_fille,num_ss,date_naissance,lieu_naissance,pays_naissance) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *",
+                [civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance]
             );
 
             // creation du token
@@ -204,15 +204,15 @@ exports.updateUser = async (req, res) => {
         }
 
 
-        const { civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance, signature } = user
+        const { civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance } = user
 
         // let { mdp } = req.body;
         // let hashedPassword = await bcrypt.hash(mdp, 10);
         // mdp = hashedPassword
 
         const updateUser = await pool.query(
-            "UPDATE salarie SET civilite = $2,nom = $3,prenom = $4,telephone = $5,rue = $6,cp = $7,ville = $8,email = $9,mdp =$10,nom_jeune_fille = $11,num_ss = $12,date_naissance = $13,lieu_naissance = $14,pays_naissance = $15,signature = $16 WHERE salarie_id = $1", [
-            id, civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance, signature
+            "UPDATE salarie SET civilite = $2,nom = $3,prenom = $4,telephone = $5,rue = $6,cp = $7,ville = $8,email = $9,mdp =$10,nom_jeune_fille = $11,num_ss = $12,date_naissance = $13,lieu_naissance = $14,pays_naissance = $15 WHERE salarie_id = $1", [
+            id, civilite, nom, prenom, telephone, rue, cp, ville, email, mdp, nom_jeune_fille, num_ss, date_naissance, lieu_naissance, pays_naissance
         ]
 
         );

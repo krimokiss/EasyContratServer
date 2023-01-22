@@ -51,7 +51,7 @@ exports.getSingleContrat = async (req,res) => {
             id
         ]);
         res.json(User.rows[0])
-        console.warn('blablablabl',User.rows);
+        // console.warn(User.rows);
     } catch (err) {
         console.error(err.message);
     }
@@ -103,16 +103,16 @@ exports.updateContrat = async (req,res) => {
         const { id } = req.params;
         let user = await pool.query (
             "SELECT * FROM contrat WHERE contrat_id=$1", [id]
-        )
+            )
+            // console.log(user.rows[0]);
        
         if(user.rowCount === 0){
-            console.log('bjsdhbshdj', user);
             res.status(400).json({
-                status: "Bad requestfdgfdgdf"
+                status: "Bad request"
               });
         }
         user = user.rows[0]
-        console.log('update contrat',user.rows[0]);
+        // console.log('update contrat',user.rows[0]);
 
         for (const key in req.body.formulaire) {
             user[key] = req.body.formulaire[key] || user[key];
