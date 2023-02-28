@@ -78,7 +78,7 @@ exports.postUserEntreprise = async (req,res) => {
             "INSERT INTO entreprise (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *",
             [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign]
         );
-        client.query(newUser,(err, res) => {
+        pool.query(newUser,(err, res) => {
             if (err) {
               console.error(err.stack);
             } else {
