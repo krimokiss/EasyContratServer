@@ -6,23 +6,19 @@ require("dotenv").config()
 //import api routers
 const salarieRoute = require('./routes/router-salarie');
 const entrepriseRoute = require('./routes/router-entreprise');
-const contratRoute = require('./routes/router-contrat')
+const contratRoute = require('./routes/router-contrat');
+const factureRoute = require('./routes/router-facture')
 
 // Middleware
 app.use(cors());
 app.use(express.json()); //req.body
 
-// app.use((req, res, next)=>{
-//     let {url, ip, method, headers} = req
-//     console.log({url, ip, method, headers});
-//     return next()
-// })
 
 //redirect to routes
 app.use("/api/salarie", salarieRoute);
 app.use("/api/entreprise", entrepriseRoute);
 app.use("/api/contrat", contratRoute);
-
+app.use("/api/facture", factureRoute)
 
 
 app.listen(5000, () => [

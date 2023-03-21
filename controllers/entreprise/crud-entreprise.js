@@ -31,6 +31,7 @@ exports.getSingleUserEntreprise = async (req,res) => {
         console.error(err.message);
     }
     };
+    
 
 exports.postUserEntreprise = async (req,res) => {
 
@@ -55,7 +56,7 @@ exports.postUserEntreprise = async (req,res) => {
     } else { 
 
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const {   
         civilite,
         nom,
@@ -68,23 +69,18 @@ exports.postUserEntreprise = async (req,res) => {
         siret,
         raison_sociale,
         code_ape,
-        sign } = req.body;
+        sign,
+    image } = req.body;
 
         let { mdp } = req.body;
         let hashedPassword = await bcrypt.hash(mdp, 10);
         mdp = hashedPassword
 
         const newUser = await pool.query (
-            "INSERT INTO entreprise (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *",
-            [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign]
+            "INSERT INTO entreprise (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign,image) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *",
+            [civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,siret,raison_sociale,code_ape,sign,image]
         );
-        pool.query(newUser,(err, res) => {
-            if (err) {
-              console.error(err.stack);
-            } else {
-              console.log('Nouvel utilisateur ajouté avec succès');
-            }
-        }); 
+     
 
  // creation du token
  let id = newUser.entreprise_id
@@ -94,7 +90,7 @@ exports.postUserEntreprise = async (req,res) => {
      },
      SECRET,
      {
-         expiresIn: "720h",
+         expiresIn: "1h",
      }
  )
 

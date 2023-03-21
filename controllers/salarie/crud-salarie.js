@@ -49,7 +49,7 @@ exports.postUser = async (req, res) => {
     ]);
     if (user.rowCount != 0) {
         console.log('Email existe deja');
-        res.status(409).json({ error: "Email is incorrect" })
+        res.status(400).json({ error: "Bad request" })
         return false;
     } else {
 
@@ -71,9 +71,10 @@ exports.postUser = async (req, res) => {
                 pays_naissance,
                  } = req.body;
 
-            let { mdp } = req.body;
-            let hashedPassword = await bcrypt.hash(mdp, 10);
-            mdp = hashedPassword
+            let { mdp } = req.body; //extrait la propriété mdp de l'objet req.body. qui contient généralement les données envoyées par le client dans une requête HTTP POST
+            let hashedPassword = await bcrypt.hash(mdp, 10); //utilise la fonction hash pour créer une version hachée du mot de passe.
+            // Le deuxième argument, 10, est le nombre de "salage" (salt rounds) 
+            mdp = hashedPassword // remplace le mot de passe en clair par sa version hachée
 
             const newUser = await pool.query(
                 "INSERT INTO salarie (civilite,nom,prenom,telephone,rue,cp,ville,email,mdp,nom_jeune_fille,num_ss,date_naissance,lieu_naissance,pays_naissance) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *",
